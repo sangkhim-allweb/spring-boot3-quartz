@@ -12,6 +12,10 @@
     docker exec -it mysql bash
     docker logs mysql
 
+# Quartz
+
+    https://github.com/quartznet/quartznet/blob/main/database/tables/tables_mysql_innodb.sql
+
 ## other
 
     Google Java Format
