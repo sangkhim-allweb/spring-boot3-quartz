@@ -40,7 +40,7 @@ public class JobScheduler {
               .forJob(job)
               .withIdentity(uuid, "GROUP1")
               .startAt(new Date())
-              .withSchedule(calendarIntervalSchedule().withIntervalInSeconds(10))
+              .withSchedule(calendarIntervalSchedule().withIntervalInMinutes(1))
               .endAt(new Date("2023/12/31"))
               .build();
 
