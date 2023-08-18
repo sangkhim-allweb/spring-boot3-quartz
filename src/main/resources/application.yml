@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    servlet:
+      path: /api
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:13306/blog?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: p@123456
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
