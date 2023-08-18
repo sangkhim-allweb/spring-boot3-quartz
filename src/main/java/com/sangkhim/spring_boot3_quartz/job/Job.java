@@ -1,6 +1,6 @@
 package com.sangkhim.spring_boot3_quartz.job;
 
-import com.sangkhim.spring_boot3_quartz.service.PostService;
+import com.sangkhim.spring_boot3_quartz.service.MailService;
 import io.micrometer.common.lang.NonNullApi;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -18,16 +18,17 @@ import org.springframework.stereotype.Component;
 @DisallowConcurrentExecution
 public class Job extends QuartzJobBean {
 
-  private PostService userService;
+  private MailService mailService;
 
   @Autowired
-  public void autowire(final PostService userService) {
-    this.userService = userService;
+  public void autowire(final MailService mailService) {
+    this.mailService = mailService;
   }
 
   @Override
   public void executeInternal(final JobExecutionContext context) {
     log.info("Job execute {}", context.getJobDetail().getKey().getName());
+    mailService.send("sangkhim", "sangkhim@gmail.com", "Hello", "Hello from Spring Boot");
     if (false) {
       this.unScheduleJob(context);
     }
