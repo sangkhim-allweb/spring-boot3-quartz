@@ -24,21 +24,21 @@ public class JobScheduler {
   private final SchedulerFactoryBean schedulerFactoryBean;
 
   public String execute(PostDTO postDTO) {
-    String identity = UUID.randomUUID().toString();
+    String uuid = UUID.randomUUID().toString();
     try {
       Scheduler scheduler = schedulerFactoryBean.getScheduler();
       scheduler.start();
 
       JobDetail job =
           newJob(Job.class)
-              .withIdentity(identity, "GROUP1")
+              .withIdentity(uuid, "GROUP1")
               .usingJobData("email", "sangkhim@gmail.com")
               .build();
 
       Trigger trigger =
           newTrigger()
               .forJob(job)
-              .withIdentity(identity, "GROUP1")
+              .withIdentity(uuid, "GROUP1")
               .startAt(new Date())
               .withSchedule(calendarIntervalSchedule().withIntervalInSeconds(10))
               .endAt(new Date("2023/12/31"))
@@ -48,7 +48,6 @@ public class JobScheduler {
     } catch (SchedulerException exception) {
       log.error("Error while scheduling mail job", exception);
     }
-
-    return identity;
+    return uuid;
   }
 }
