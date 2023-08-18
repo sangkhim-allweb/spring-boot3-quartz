@@ -15,6 +15,7 @@
 # Quartz
 
     https://github.com/quartznet/quartznet/blob/main/database/tables/tables_mysql_innodb.sql
+    http://www.quartz-scheduler.org/documentation/quartz-1.8.6/configuration/ConfigJDBCJobStoreClustering.html
 
 ## other
 
