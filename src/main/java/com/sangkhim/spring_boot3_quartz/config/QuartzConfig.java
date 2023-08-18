@@ -1,6 +1,5 @@
-package com.sangkhim.spring_boot3_quartz.config.quartz;
+package com.sangkhim.spring_boot3_quartz.config;
 
-import com.sangkhim.spring_boot3_quartz.config.quartz.constant.QuartzScheduler;
 import de.chandre.quartz.spring.AutowiringSpringBeanJobFactory;
 import java.io.IOException;
 import java.util.Properties;
@@ -24,6 +23,8 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @RequiredArgsConstructor
 public class QuartzConfig {
 
+  private final String QUARTZ_PROPERTIES = "quartz/quartz.properties";
+
   @Bean
   public SchedulerFactoryBean schedulerFactoryBean(
       final @Autowired ApplicationContext applicationContext)
@@ -32,13 +33,12 @@ public class QuartzConfig {
     AutowiringSpringBeanJobFactory jobFactory = new AutowiringSpringBeanJobFactory();
     jobFactory.setApplicationContext(applicationContext);
 
-    StdSchedulerFactory stdSchedulerFactory =
-        new StdSchedulerFactory(QuartzScheduler.QUARTZ_PROPERTIES);
+    StdSchedulerFactory stdSchedulerFactory = new StdSchedulerFactory(QUARTZ_PROPERTIES);
 
     SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
     scheduler.setSchedulerFactory(stdSchedulerFactory);
     scheduler.setQuartzProperties(this.quartzProperties());
-    scheduler.setConfigLocation(new ClassPathResource(QuartzScheduler.QUARTZ_PROPERTIES));
+    scheduler.setConfigLocation(new ClassPathResource(QUARTZ_PROPERTIES));
     scheduler.setJobFactory(jobFactory);
     scheduler.setDataSource(this.quartzDataSource());
     scheduler.setWaitForJobsToCompleteOnShutdown(true);
@@ -58,7 +58,7 @@ public class QuartzConfig {
   public Properties quartzProperties() throws IOException {
 
     PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-    propertiesFactoryBean.setLocation(new ClassPathResource(QuartzScheduler.QUARTZ_PROPERTIES));
+    propertiesFactoryBean.setLocation(new ClassPathResource(QUARTZ_PROPERTIES));
     propertiesFactoryBean.afterPropertiesSet();
     return propertiesFactoryBean.getObject();
   }
