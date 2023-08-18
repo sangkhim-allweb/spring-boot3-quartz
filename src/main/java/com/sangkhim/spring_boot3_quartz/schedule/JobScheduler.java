@@ -28,6 +28,7 @@ public class JobScheduler {
     try {
       Scheduler scheduler = schedulerFactoryBean.getScheduler();
       scheduler.start();
+
       JobDetail job =
           newJob(Job.class)
               .withIdentity(identity, "GROUP1")
