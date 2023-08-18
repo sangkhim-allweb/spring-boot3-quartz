@@ -17,6 +17,6 @@ spring:
     job-store-type: jdbc
     jdbc:
       initialize-schema: always
-      schema: classpath:quartz/quartz_script.sql
+      schema: classpath:quartz/quartz.sql
       platform: mysql
     scheduler-name: quartzScheduler
