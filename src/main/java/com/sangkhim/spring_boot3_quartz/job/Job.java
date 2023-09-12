@@ -28,7 +28,11 @@ public class Job extends QuartzJobBean {
   @Override
   public void executeInternal(final JobExecutionContext context) {
     log.info("Job execute {}", context.getJobDetail().getKey().getName());
-    mailService.send("sangkhim", "sangkhim@gmail.com", "Hello", "Hello from Spring Boot");
+    mailService.send(
+        context.getJobDetail().getJobDataMap().get("from").toString(),
+        context.getJobDetail().getJobDataMap().get("to").toString(),
+        context.getJobDetail().getJobDataMap().get("subject").toString(),
+        context.getJobDetail().getJobDataMap().get("body").toString());
     if (false) {
       this.unScheduleJob(context);
     }

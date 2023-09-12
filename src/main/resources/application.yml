@@ -7,7 +7,7 @@ spring:
       path: /api
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://127.0.0.1:13306/blog?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    jdbc-url: jdbc:mysql://127.0.0.1:13306/blog?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
   flyway:
@@ -23,8 +23,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username:
-    password:
+    username: thenchanthavithou@gmail.com
+    password: zmtfurddgbvqamnb
     properties:
       mail:
         smtp:

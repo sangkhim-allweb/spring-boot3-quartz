@@ -5,7 +5,7 @@ import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 import com.sangkhim.spring_boot3_quartz.job.Job;
-import com.sangkhim.spring_boot3_quartz.model.dto.PostDTO;
+import com.sangkhim.spring_boot3_quartz.model.dto.JobDTO;
 import java.util.Date;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class JobScheduler {
   private final SchedulerFactoryBean schedulerFactoryBean;
 
-  public String execute(PostDTO postDTO) {
+  public String execute(JobDTO jobDTO) {
     String uuid = UUID.randomUUID().toString();
     try {
       Scheduler scheduler = schedulerFactoryBean.getScheduler();
@@ -32,7 +32,10 @@ public class JobScheduler {
       JobDetail job =
           newJob(Job.class)
               .withIdentity(uuid, "GROUP1")
-              .usingJobData("email", "sangkhim@gmail.com")
+              .usingJobData("from", jobDTO.getTo())
+              .usingJobData("to", jobDTO.getTo())
+              .usingJobData("subject", jobDTO.getSubject())
+              .usingJobData("body", jobDTO.getBody())
               .build();
 
       Trigger trigger =
