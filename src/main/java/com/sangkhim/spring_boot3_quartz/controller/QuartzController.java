@@ -1,5 +1,6 @@
 package com.sangkhim.spring_boot3_quartz.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sangkhim.spring_boot3_quartz.model.dto.JobDTO;
 import com.sangkhim.spring_boot3_quartz.schedule.JobScheduler;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class QuartzController {
   private final JobScheduler jobScheduler;
 
   @GetMapping("/v1/quartz")
-  public ResponseEntity<String> quartz() {
+  public ResponseEntity<String> quartz() throws JsonProcessingException {
     JobDTO jobDTO = new JobDTO();
     jobDTO.setFrom("info@borey.app");
     jobDTO.setTo("sangkhim@gmail.com");

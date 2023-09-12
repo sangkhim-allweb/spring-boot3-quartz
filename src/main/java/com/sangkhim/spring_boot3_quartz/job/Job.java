@@ -1,5 +1,8 @@
 package com.sangkhim.spring_boot3_quartz.job;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sangkhim.spring_boot3_quartz.model.dto.JobDTO;
 import com.sangkhim.spring_boot3_quartz.service.MailService;
 import io.micrometer.common.lang.NonNullApi;
 import lombok.Setter;
@@ -28,11 +31,16 @@ public class Job extends QuartzJobBean {
   @Override
   public void executeInternal(final JobExecutionContext context) {
     log.info("Job execute {}", context.getJobDetail().getKey().getName());
-    mailService.send(
-        context.getJobDetail().getJobDataMap().get("from").toString(),
-        context.getJobDetail().getJobDataMap().get("to").toString(),
-        context.getJobDetail().getJobDataMap().get("subject").toString(),
-        context.getJobDetail().getJobDataMap().get("body").toString());
+    JobDTO jobDTO = null;
+    try {
+      jobDTO =
+          new ObjectMapper()
+              .readValue(
+                  context.getJobDetail().getJobDataMap().get("jobDTO").toString(), JobDTO.class);
+    } catch (JsonProcessingException e) {
+      log.info(e.toString());
+    }
+    mailService.send(jobDTO.getFrom(), jobDTO.getTo(), jobDTO.getSubject(), jobDTO.getBody());
     if (false) {
       this.unScheduleJob(context);
     }
