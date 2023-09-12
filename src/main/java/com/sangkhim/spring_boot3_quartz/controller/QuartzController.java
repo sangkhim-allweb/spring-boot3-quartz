@@ -18,7 +18,7 @@ public class QuartzController {
   @GetMapping("/v1/quartz")
   public ResponseEntity<String> quartz() throws JsonProcessingException {
     JobDTO jobDTO = new JobDTO();
-    jobDTO.setFrom("info@borey.app");
+    jobDTO.setFrom("henchanthavithou@gmail.com");
     jobDTO.setTo("sangkhim@gmail.com");
     jobDTO.setSubject("Hello");
     jobDTO.setBody("Hello from Spring Boot");
