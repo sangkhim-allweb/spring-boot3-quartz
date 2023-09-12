@@ -35,8 +35,7 @@ public class Job extends QuartzJobBean {
     try {
       jobDTO =
           new ObjectMapper()
-              .readValue(
-                  context.getJobDetail().getJobDataMap().get("jobDTO").toString(), JobDTO.class);
+              .readValue(context.getMergedJobDataMap().get("jobDTO").toString(), JobDTO.class);
     } catch (JsonProcessingException e) {
       log.info(e.toString());
     }
