@@ -7,14 +7,10 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class TestObjectMapper {
+public class JavaApp {
 
   public static void main(String[] args) throws JsonProcessingException {
-    JobDTO jobDTO = new JobDTO();
-    jobDTO.setFrom("from");
-    jobDTO.setTo("to");
-    jobDTO.setSubject("subject");
-    jobDTO.setBody("body");
+    JobDTO jobDTO = JobDTO.builder().from("from").to("to").subject("subject").body("body").build();
 
     Map<String, Object> map = Map.of("key1", new ObjectMapper().writeValueAsString(jobDTO));
 
