@@ -40,14 +40,14 @@ public class JobScheduler {
                   new JobDataMap(Map.of("jobDTO", new ObjectMapper().writeValueAsString(jobDTO))))
               .build();
 
-//      JobDetail job =
-//              newJob(Job.class)
-//                      .withIdentity(uuid, "GROUP1")
-//                      .usingJobData("from", jobDTO.getTo())
-//                      .usingJobData("to", jobDTO.getTo())
-//                      .usingJobData("subject", jobDTO.getSubject())
-//                      .usingJobData("body", jobDTO.getBody())
-//                      .build();
+      //            JobDetail job =
+      //                    newJob(Job.class)
+      //                            .withIdentity(uuid, "GROUP1")
+      //                            .usingJobData("from", jobDTO.getTo())
+      //                            .usingJobData("to", jobDTO.getTo())
+      //                            .usingJobData("subject", jobDTO.getSubject())
+      //                            .usingJobData("body", jobDTO.getBody())
+      //                            .build();
 
       Trigger trigger =
           newTrigger()
